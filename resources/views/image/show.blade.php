@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '| '. $image->name)
 @section('content')
-	<img src="../{{ $image->url }}" alt="">
+	<img src="../{{ $image->path }}" alt="">
 	<div class="col-md-5" style="float:right">
 		<div class="row">
 			<div class="col-md-6">

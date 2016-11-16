@@ -8,7 +8,7 @@
 				@if($image->user_id == $user->id && $image->privacy == 'public')
 		            <div class="col-sm-3">
 		                <a href="{{ route('image.show', $image->name) }}" class="thumbnail">
-		                    <img src="../{{ $image->url }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
+		                    <img src="../{{ $image->path }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
 		                </a>
 		            </div>
 		        @endif
@@ -27,7 +27,7 @@
 				            	</button>
 			            	</a>
 			                <a href="{{ route('image.show', $image->name) }}" class="thumbnail">
-			                    <img src="../{{ $image->url }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
+			                    <img src="../{{ $image->path }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
 			                </a>
 						</div>
 		            </div>

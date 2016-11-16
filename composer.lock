@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c2875e792387ddc7d7c3c6af22ac553",
-    "content-hash": "40e96ff705ac212a8c6f57c7195d604a",
+    "hash": "4b5375bcbc7938c2a7bb3af7f7e2fdbd",
+    "content-hash": "b3b0b39c4e3e29b693929475024f3d5f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -958,6 +958,29 @@
                 "random"
             ],
             "time": "2016-11-07 23:38:38"
+        },
+        {
+            "name": "php-academy/filters",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ivanweiler/phpacademy-image-filters.git",
+                "reference": "00ee1a14026c3494ad55645310e1afc435ea1c0f"
+            },
+            "require": {
+                "intervention/image": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpAcademy\\Image\\Filters\\": "src/PhpAcademy/Image/Filters"
+                }
+            },
+            "license": [
+                "GPL3"
+            ],
+            "description": "Set of filter for image processing",
+            "time": "2016-11-15 17:22:08"
         },
         {
             "name": "psr/http-message",
@@ -3664,7 +3687,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "php-academy/filters": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -3,16 +3,16 @@
 @section('content')
     <div class="row">
         @foreach ($images as $image)
-            @if(Auth::guest() && ($image->privacy === 'public'))
+            @if(Auth::guest() && ($image->privacy == 'public'))
                 <div class="col-sm-3">
                     <a href="{{ route('image.show', $image->name) }}" class="thumbnail">
-                        <img src="{{ $image->url }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
+                        <img src="{{ $image->path }}" alt="{{ $image->name }}" title="{{ $image->name }}" />
                     </a>
                 </div>
             @elseif(Auth::user())
                 <div class="col-sm-3">
                     <a href="{{ route('image.show', $image->name) }}" class="thumbnail">
-                        <img src="{{ $image->url }}" alt="{{ $image->name }}" title="{{ $image->name}}" />
+                        <img src="{{ $image->path }}" alt="{{ $image->name }}" title="{{ $image->name}}" />
                     </a>
                 </div>
             @endif

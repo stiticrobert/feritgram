@@ -46,7 +46,7 @@ class ImageController extends Controller
         $image->user_id     = Auth::user()->id;
         $image->name        = $name;
         $image->description = $description;
-        $image->url         = 'uploads/' .$name . '_large.jpg';
+        $image->path         = 'uploads/' .$name .'.jpg';
         $image->privacy     = $privacy;
         $image->save();
 
@@ -60,9 +60,7 @@ class ImageController extends Controller
 
         $img = ImageManagerStatic::make($_FILES['image']['tmp_name']);
         $img->resize(640, 640);
-        $img->save('uploads/' . $name . '_large.jpg');
-        $img->fit(320, 320);
-        $img->save('uploads/' . $name . '_small.jpg');
+        $img->save('uploads/' . $name . '.jpg');
 
         return redirect('/');
     }
@@ -92,7 +90,6 @@ class ImageController extends Controller
     public function edit($id)
     {
         $image = Image::find($id);
-
         $tags = Tag::all();
         $tags2 = array();
 
@@ -102,6 +99,7 @@ class ImageController extends Controller
 
         return view('image.edit')->withimage($image)->withTags($tags2);
     }
+    
     /**
      * Update the specified resource in storage.
      *
@@ -112,17 +110,25 @@ class ImageController extends Controller
     public function update(Request $request, $id)
     {
         $image = Image::find($id);
+
         $this->validate($request, array(
-            'name'        => 'required|unique:images|max:20',
-            'description' => 'required|max:255',
-            'privacy'     => 'required'
+            'name'        => 'required|max:20',
+            'description' => 'required|max:255'
         ));
 
         $image->name        = $request->input('name');
         $image->description = $request->input('description');
         $image->privacy     = $request->input('privacy');
-        $image->save();
 
+        $path = public_path();
+        $img  = ImageManagerStatic::make(public_path() . '/' . $image->path);
+          
+        if($request->input('filter')) {
+            $class = '\\PhpAcademy\\Image\\Filters\\' . $request->input('filter') . 'Filter';
+            $img->filter(new $class);
+            $img->save();
+        }
+        
         if (isset($request->tags)) {
             $image->tags()->sync($request->tags);
         } else {
@@ -132,7 +138,7 @@ class ImageController extends Controller
         $image->save();
         Session::flash('success', 'Slika uspješno ažurirana');
 
-        return redirect()->route('image.show', $image->id);
+        return redirect('/');
     }
 
     /**
